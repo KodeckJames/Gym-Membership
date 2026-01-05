@@ -30,6 +30,7 @@ Partial Class Form1
         NumericUpDown1 = New NumericUpDown()
         Button1 = New Button()
         DataGridView1 = New DataGridView()
+        Label4 = New Label()
         CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -39,13 +40,13 @@ Partial Class Form1
         TextBox1.Location = New Point(34, 57)
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "Enter name"
-        TextBox1.Size = New Size(150, 31)
+        TextBox1.Size = New Size(184, 31)
         TextBox1.TabIndex = 0
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(34, 19)
+        Label1.Location = New Point(34, 29)
         Label1.Name = "Label1"
         Label1.Size = New Size(131, 25)
         Label1.TabIndex = 1
@@ -54,7 +55,7 @@ Partial Class Form1
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(235, 19)
+        Label2.Location = New Point(258, 27)
         Label2.Name = "Label2"
         Label2.Size = New Size(96, 25)
         Label2.TabIndex = 2
@@ -65,10 +66,10 @@ Partial Class Form1
         ComboBox1.AllowDrop = True
         ComboBox1.FormattingEnabled = True
         ComboBox1.Items.AddRange(New Object() {"Monthly", "Quarterly", "Annually"})
-        ComboBox1.Location = New Point(235, 57)
+        ComboBox1.Location = New Point(258, 55)
         ComboBox1.MaxLength = 100
         ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(255, 33)
+        ComboBox1.Size = New Size(279, 33)
         ComboBox1.TabIndex = 3
         ComboBox1.Tag = "Monthly"
         ComboBox1.Text = "Select Plan"
@@ -76,7 +77,7 @@ Partial Class Form1
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(612, 19)
+        Label3.Location = New Point(647, 27)
         Label3.Name = "Label3"
         Label3.Size = New Size(140, 25)
         Label3.TabIndex = 4
@@ -84,7 +85,7 @@ Partial Class Form1
         ' 
         ' NumericUpDown1
         ' 
-        NumericUpDown1.Location = New Point(612, 58)
+        NumericUpDown1.Location = New Point(647, 55)
         NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         NumericUpDown1.Name = "NumericUpDown1"
         NumericUpDown1.Size = New Size(180, 31)
@@ -103,17 +104,27 @@ Partial Class Form1
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(34, 198)
+        DataGridView1.Location = New Point(25, 229)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 62
-        DataGridView1.Size = New Size(360, 299)
+        DataGridView1.Size = New Size(802, 317)
         DataGridView1.TabIndex = 7
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(25, 201)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(140, 25)
+        Label4.TabIndex = 8
+        Label4.Text = "List of Members"
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1253, 639)
+        Controls.Add(Label4)
         Controls.Add(DataGridView1)
         Controls.Add(Button1)
         Controls.Add(NumericUpDown1)
@@ -137,5 +148,6 @@ Partial Class Form1
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents Button1 As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Label4 As Label
 
 End Class
