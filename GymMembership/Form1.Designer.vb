@@ -107,6 +107,7 @@ Partial Class Form1
         DataGridView1.Location = New Point(25, 229)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 62
+        DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         DataGridView1.Size = New Size(802, 317)
         DataGridView1.TabIndex = 7
         ' 
