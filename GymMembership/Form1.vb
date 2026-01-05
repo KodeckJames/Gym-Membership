@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 
 Public Class Form1
-
     Structure Member
         Public MemberID As Integer
         Public Name As String
@@ -14,10 +13,8 @@ Public Class Form1
     Dim Members As New List(Of Member)
     Dim filePath As String = "gym_data.csv"
 
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        ComboBox1.Items.AddRange({"Monthly", "Quarterly", "Annual"})
+        ComboBox1.Items.AddRange({"Monthly (KES 3,000)", "Quarterly (KES 8,000)", "Annually (KES 25,000)"})
         ComboBox1.SelectedIndex = 0
         NumericUpDown1.Minimum = 1
 
@@ -27,27 +24,31 @@ Public Class Form1
         DataGridView1.Columns(2).Name = "Plan Type"
         DataGridView1.Columns(3).Name = "Total Cost"
         DataGridView1.Columns(4).Name = "Expiry Date"
+        DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        DataGridView1.AllowUserToAddRows = False
 
         LoadData()
         UpdateGrid()
+        UpdatePricePreview()
     End Sub
 
-
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        UpdatePricePreview()
+    End Sub
 
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        UpdateGrid(txtSearch.Text)
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
+        UpdatePricePreview()
     End Sub
 
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
-
+        UpdatePricePreview()
     End Sub
 
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
         If String.IsNullOrWhiteSpace(TextBox1.Text) Then
             MessageBox.Show("Please enter a name.")
             Return
@@ -61,13 +62,13 @@ Public Class Form1
 
         Dim units As Integer = CInt(NumericUpDown1.Value)
         Select Case m.Plan
-            Case "Monthly"
+            Case "Monthly (KES 3,000)"
                 m.DurationMonths = units
                 m.TotalCost = units * 3000
-            Case "Quarterly"
+            Case "Quarterly (KES 8,000)"
                 m.DurationMonths = units * 3
                 m.TotalCost = units * 8000
-            Case "Annual"
+            Case "Annually (KES 25,000)"
                 m.DurationMonths = units * 12
                 m.TotalCost = units * 25000
         End Select
@@ -81,15 +82,13 @@ Public Class Form1
         MessageBox.Show("Member added successfully!")
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Sub UpdateGrid()
+    Sub UpdateGrid(Optional filter As String = "")
         DataGridView1.Rows.Clear()
         For Each m In Members
-            Dim expiry As Date = m.StartDate.AddMonths(m.DurationMonths)
-            DataGridView1.Rows.Add(m.MemberID, m.Name, m.Plan, "KES " & m.TotalCost.ToString("N2"), expiry.ToShortDateString())
+            If String.IsNullOrEmpty(filter) OrElse m.Name.ToLower().Contains(filter.ToLower()) Then
+                Dim expiry As Date = m.StartDate.AddMonths(m.DurationMonths)
+                DataGridView1.Rows.Add(m.MemberID, m.Name, m.Plan, "KES " & m.TotalCost.ToString("N2"), expiry.ToShortDateString())
+            End If
         Next
     End Sub
 
@@ -125,29 +124,43 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-
-    End Sub
-
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If DataGridView1.SelectedRows.Count > 0 Then
-
-            Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?",
-                                                         "Confirm Delete", MessageBoxButtons.YesNo)
-
+            Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?", "Confirm Delete", MessageBoxButtons.YesNo)
             If result = DialogResult.Yes Then
+                Dim selectedID As Integer = CInt(DataGridView1.SelectedRows(0).Cells(0).Value)
+                Dim memberToRemove = Members.FirstOrDefault(Function(x) x.MemberID = selectedID)
+                Members.Remove(memberToRemove)
 
-                Dim index As Integer = DataGridView1.SelectedRows(0).Index
-
-                Members.RemoveAt(index)
+                For i As Integer = 0 To Members.Count - 1
+                    Dim updatedMember = Members(i)
+                    updatedMember.MemberID = i + 1
+                    Members(i) = updatedMember
+                Next
 
                 SaveData()
                 UpdateGrid()
-
                 MessageBox.Show("Member deleted successfully.")
             End If
         Else
-            MessageBox.Show("Please click the row header on the left of the table to select a member first.")
+            MessageBox.Show("Please select a full row to delete.")
         End If
     End Sub
+
+    Sub UpdatePricePreview()
+        If ComboBox1.SelectedItem Is Nothing Then Exit Sub
+        Dim plan As String = ComboBox1.SelectedItem.ToString()
+        Dim units As Integer = CInt(NumericUpDown1.Value)
+        Dim total As Decimal = 0
+        Select Case plan
+            Case "Monthly (KES 3,000)"
+                total = units * 3000
+            Case "Quarterly (KES 8,000)"
+                total = units * 8000
+            Case "Annually (KES 25,000)"
+                total = units * 25000
+        End Select
+        lblTotalPreview.Text = String.Format("Total: KES {0:N2}", total)
+    End Sub
+
 End Class

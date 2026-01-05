@@ -32,33 +32,39 @@ Partial Class Form1
         DataGridView1 = New DataGridView()
         Label4 = New Label()
         btnDelete = New Button()
+        lblTotalPreview = New Label()
+        txtSearch = New TextBox()
+        Label5 = New Label()
+        Label6 = New Label()
         CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(34, 57)
+        TextBox1.Location = New Point(237, 134)
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "Enter name"
-        TextBox1.Size = New Size(184, 31)
+        TextBox1.Size = New Size(218, 31)
         TextBox1.TabIndex = 0
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(34, 29)
+        Label1.Font = New Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(237, 103)
         Label1.Name = "Label1"
-        Label1.Size = New Size(131, 25)
+        Label1.Size = New Size(162, 28)
         Label1.TabIndex = 1
-        Label1.Text = "Member Name"
+        Label1.Text = "Member's Name"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(258, 27)
+        Label2.Font = New Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(545, 103)
         Label2.Name = "Label2"
-        Label2.Size = New Size(96, 25)
+        Label2.Size = New Size(111, 28)
         Label2.TabIndex = 2
         Label2.Text = "Select Plan"
         ' 
@@ -66,8 +72,7 @@ Partial Class Form1
         ' 
         ComboBox1.AllowDrop = True
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"Monthly", "Quarterly", "Annually"})
-        ComboBox1.Location = New Point(258, 55)
+        ComboBox1.Location = New Point(545, 134)
         ComboBox1.MaxLength = 100
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(279, 33)
@@ -78,15 +83,16 @@ Partial Class Form1
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(647, 27)
+        Label3.Font = New Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(931, 103)
         Label3.Name = "Label3"
-        Label3.Size = New Size(140, 25)
+        Label3.Size = New Size(163, 28)
         Label3.TabIndex = 4
         Label3.Text = "Duration (Units):" & vbCrLf
         ' 
         ' NumericUpDown1
         ' 
-        NumericUpDown1.Location = New Point(647, 57)
+        NumericUpDown1.Location = New Point(931, 133)
         NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         NumericUpDown1.Name = "NumericUpDown1"
         NumericUpDown1.Size = New Size(180, 31)
@@ -95,17 +101,19 @@ Partial Class Form1
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(34, 135)
+        Button1.BackColor = Color.Lime
+        Button1.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button1.Location = New Point(606, 201)
         Button1.Name = "Button1"
         Button1.Size = New Size(156, 34)
         Button1.TabIndex = 6
         Button1.Text = "Add Member"
-        Button1.UseVisualStyleBackColor = True
+        Button1.UseVisualStyleBackColor = False
         ' 
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(25, 229)
+        DataGridView1.Location = New Point(309, 380)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 62
         DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -115,27 +123,70 @@ Partial Class Form1
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(25, 201)
+        Label4.Font = New Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.Location = New Point(309, 340)
         Label4.Name = "Label4"
-        Label4.Size = New Size(140, 25)
+        Label4.Size = New Size(165, 28)
         Label4.TabIndex = 8
-        Label4.Text = "List of Members"
+        Label4.Text = "List of Members:"
         ' 
         ' btnDelete
         ' 
         btnDelete.BackColor = Color.Red
-        btnDelete.Location = New Point(609, 135)
+        btnDelete.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDelete.Location = New Point(1127, 380)
         btnDelete.Name = "btnDelete"
-        btnDelete.Size = New Size(218, 33)
+        btnDelete.Size = New Size(233, 33)
         btnDelete.TabIndex = 9
         btnDelete.Text = "Delete Selected Member"
         btnDelete.UseVisualStyleBackColor = False
+        ' 
+        ' lblTotalPreview
+        ' 
+        lblTotalPreview.AutoSize = True
+        lblTotalPreview.Font = New Font("Segoe UI", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        lblTotalPreview.Location = New Point(1127, 133)
+        lblTotalPreview.Name = "lblTotalPreview"
+        lblTotalPreview.Size = New Size(155, 28)
+        lblTotalPreview.TabIndex = 10
+        lblTotalPreview.Text = "Total: KES 0.00"
+        ' 
+        ' txtSearch
+        ' 
+        txtSearch.Location = New Point(476, 293)
+        txtSearch.Name = "txtSearch"
+        txtSearch.Size = New Size(150, 31)
+        txtSearch.TabIndex = 11
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(309, 293)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(161, 28)
+        Label5.TabIndex = 12
+        Label5.Text = "Search Member:"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Location = New Point(221, 9)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(1040, 38)
+        Label6.TabIndex = 13
+        Label6.Text = "Jacked Homies Gym Membership and Subscriptions Management System"
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1253, 639)
+        ClientSize = New Size(1783, 732)
+        Controls.Add(Label6)
+        Controls.Add(Label5)
+        Controls.Add(txtSearch)
+        Controls.Add(lblTotalPreview)
         Controls.Add(btnDelete)
         Controls.Add(Label4)
         Controls.Add(DataGridView1)
@@ -163,5 +214,9 @@ Partial Class Form1
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label4 As Label
     Friend WithEvents btnDelete As Button
+    Friend WithEvents lblTotalPreview As Label
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
 
 End Class
