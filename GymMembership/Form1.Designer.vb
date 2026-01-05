@@ -31,6 +31,7 @@ Partial Class Form1
         Button1 = New Button()
         DataGridView1 = New DataGridView()
         Label4 = New Label()
+        btnDelete = New Button()
         CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -85,7 +86,7 @@ Partial Class Form1
         ' 
         ' NumericUpDown1
         ' 
-        NumericUpDown1.Location = New Point(647, 55)
+        NumericUpDown1.Location = New Point(647, 57)
         NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         NumericUpDown1.Name = "NumericUpDown1"
         NumericUpDown1.Size = New Size(180, 31)
@@ -120,11 +121,22 @@ Partial Class Form1
         Label4.TabIndex = 8
         Label4.Text = "List of Members"
         ' 
+        ' btnDelete
+        ' 
+        btnDelete.BackColor = Color.Red
+        btnDelete.Location = New Point(609, 135)
+        btnDelete.Name = "btnDelete"
+        btnDelete.Size = New Size(218, 33)
+        btnDelete.TabIndex = 9
+        btnDelete.Text = "Delete Selected Member"
+        btnDelete.UseVisualStyleBackColor = False
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1253, 639)
+        Controls.Add(btnDelete)
         Controls.Add(Label4)
         Controls.Add(DataGridView1)
         Controls.Add(Button1)
@@ -150,5 +162,6 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label4 As Label
+    Friend WithEvents btnDelete As Button
 
 End Class

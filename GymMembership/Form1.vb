@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Public Class Form1
-    
+
     Structure Member
         Public MemberID As Integer
         Public Name As String
@@ -127,5 +127,27 @@ Public Class Form1
 
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If DataGridView1.SelectedRows.Count > 0 Then
+
+            Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?",
+                                                         "Confirm Delete", MessageBoxButtons.YesNo)
+
+            If result = DialogResult.Yes Then
+
+                Dim index As Integer = DataGridView1.SelectedRows(0).Index
+
+                Members.RemoveAt(index)
+
+                SaveData()
+                UpdateGrid()
+
+                MessageBox.Show("Member deleted successfully.")
+            End If
+        Else
+            MessageBox.Show("Please click the row header on the left of the table to select a member first.")
+        End If
     End Sub
 End Class
