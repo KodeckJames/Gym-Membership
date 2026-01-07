@@ -172,11 +172,11 @@ Partial Class Form1
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Cooper Black", 16F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(421, 46)
+        Label6.Location = New Point(392, 45)
         Label6.Name = "Label6"
-        Label6.Size = New Size(1190, 36)
+        Label6.Size = New Size(1278, 36)
         Label6.TabIndex = 13
-        Label6.Text = "Jacked Homies Gym Membership and Subscriptions Management System"
+        Label6.Text = "Kenyatta University Gym Membership and Subscriptions Management System"
         ' 
         ' Form1
         ' 
