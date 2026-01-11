@@ -27,6 +27,9 @@ Public Class Form1
         DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         DataGridView1.AllowUserToAddRows = False
 
+        lblSearchError.Text = ""
+        lblSearchError.ForeColor = Color.Red
+
         LoadData()
         UpdateGrid()
         UpdatePricePreview()
@@ -84,12 +87,21 @@ Public Class Form1
 
     Sub UpdateGrid(Optional filter As String = "")
         DataGridView1.Rows.Clear()
+        Dim found As Boolean = False
+
         For Each m In Members
             If String.IsNullOrEmpty(filter) OrElse m.Name.ToLower().Contains(filter.ToLower()) Then
                 Dim expiry As Date = m.StartDate.AddMonths(m.DurationMonths)
                 DataGridView1.Rows.Add(m.MemberID, m.Name, m.Plan, "KES " & m.TotalCost.ToString("N2"), expiry.ToShortDateString())
+                found = True
             End If
         Next
+
+        If Not String.IsNullOrEmpty(filter) AndAlso Not found Then
+            lblSearchError.Text = "Sorry, member not found"
+        Else
+            lblSearchError.Text = ""
+        End If
     End Sub
 
     Sub SaveData()
@@ -105,23 +117,27 @@ Public Class Form1
     End Sub
 
     Sub LoadData()
-        If File.Exists(filePath) Then
-            Members.Clear()
-            For Each line In File.ReadAllLines(filePath)
-                Dim parts = line.Split("|"c)
-                If parts.Length = 6 Then
-                    Dim m As New Member With {
-                        .MemberID = CInt(parts(0)),
-                        .Name = parts(1),
-                        .Plan = parts(2),
-                        .StartDate = CDate(parts(3)),
-                        .DurationMonths = CInt(parts(4)),
-                        .TotalCost = CDec(parts(5))
-                    }
-                    Members.Add(m)
-                End If
-            Next
-        End If
+        Try
+            If File.Exists(filePath) Then
+                Members.Clear()
+                For Each line In File.ReadAllLines(filePath)
+                    Dim parts = line.Split("|"c)
+                    If parts.Length = 6 Then
+                        Dim m As New Member With {
+                            .MemberID = CInt(parts(0)),
+                            .Name = parts(1),
+                            .Plan = parts(2),
+                            .StartDate = CDate(parts(3)),
+                            .DurationMonths = CInt(parts(4)),
+                            .TotalCost = CDec(parts(5))
+                        }
+                        Members.Add(m)
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click

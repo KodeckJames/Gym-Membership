@@ -36,6 +36,7 @@ Partial Class Form1
         txtSearch = New TextBox()
         Label5 = New Label()
         Label6 = New Label()
+        lblSearchError = New Label()
         CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -178,11 +179,21 @@ Partial Class Form1
         Label6.TabIndex = 13
         Label6.Text = "Kenyatta University Gym Membership and Subscriptions Management System"
         ' 
+        ' lblSearchError
+        ' 
+        lblSearchError.AutoSize = True
+        lblSearchError.Location = New Point(769, 327)
+        lblSearchError.Name = "lblSearchError"
+        lblSearchError.Size = New Size(166, 25)
+        lblSearchError.TabIndex = 14
+        lblSearchError.Text = "Error handling label"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1783, 732)
+        Controls.Add(lblSearchError)
         Controls.Add(Label6)
         Controls.Add(Label5)
         Controls.Add(txtSearch)
@@ -218,5 +229,6 @@ Partial Class Form1
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents lblSearchError As Label
 
 End Class
